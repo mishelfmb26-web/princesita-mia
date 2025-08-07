@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Princesita Mía 💕</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      font-family: 'Comic Sans MS', cursive;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: #ff1493;
+      overflow: hidden;
+    }
+
+    /* Cuadro pequeño centrado */
+    .cuadro {
+      background: rgba(255, 192, 203, 0.9);
+      border: 2px solid #ff69b4;
+      border-radius: 12px;
+      padding: 10px 25px;
+      box-shadow: 0 0 8px #ff69b4aa;
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #880e4f;
+      text-shadow: 1px 1px 4px #fff;
+      user-select: none;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* Lluvia de frases */
+    .frase {
+      position: fixed;
+      opacity: 0.9;
+      animation: caer 10s linear infinite;
+      white-space: nowrap;
+      pointer-events: none;
+      font-family: 'Comic Sans MS', cursive;
+      user-select: none;
+      z-index: 1;
+    }
+
+    @keyframes caer {
+      0% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Botón para mostrar video */
+    #boton-sonido {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 1.5em;
+      color: #ff1493;
+      cursor: pointer;
+      user-select: none;
+      z-index: 20;
+      font-family: 'Comic Sans MS', cursive;
+      text-shadow: 1px 1px 3px #fff;
+      padding: 5px 8px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    #boton-sonido:hover {
+      background-color: #ff69b4aa;
+      color: white;
+    }
+
+    /* Contenedor del video visible */
+    #contenedor-video {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      z-index: 15;
+    }
+
+    iframe {
+      width: 250px;
+      height: 140px;
+      border-radius: 12px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cuadro">Princesita mía ❤️‍🩹✨🙈</div>
+
+  <!-- Botón para mostrar video -->
+  <button id="boton-sonido" title="Reproducir música">🎵 Música</button>
+
+  <!-- Contenedor donde se cargará el video -->
+  <div id="contenedor-video"></div>
+
+  <script>
+    // Frases para la lluvia
+    const frases = [
+      "La amo", "Eres mi todo", "Mi razón de sonreír", "Usted es arte",
+      "Mi princesa", "Mi amor bonito", "Mi ternura", "Es mi sol",
+      "Contigo todo es mejor", "Mi niña hermosa", "Eres perfecta",
+      "Eres única", "Mi cielo", "Mi felicidad", "Eres lo mejor que me pasó",
+      "Te necesito", "Mi dulzura", "Mi ilusión", "Eres increíble",
+      "Mi corazón es suyo", "Mi chiquita hermosa", "La adoro","Usted me hace sentir todo lo quise sentir",
+      "princeista de mami","muñeca linda","preciosa de Dios","La amo","La amo","La amo",
+      "La amo","La amo","La amo","la amo mushoooo"
+    ];
+
+    function lloverFrase() {
+      const frase = document.createElement("div");
+      frase.className = "frase";
+      frase.textContent = frases[Math.floor(Math.random() * frases.length)];
+      frase.style.left = Math.random() * 100 + "vw";
+      frase.style.top = "-5vh";
+      frase.style.fontSize = (Math.random() * 20 + 10) + "px";
+      frase.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      frase.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      document.body.appendChild(frase);
+
+      setTimeout(() => frase.remove(), 10000);
+    }
+
+    setInterval(lloverFrase, 200);
+
+    // Acción del botón
+    const boton = document.getElementById('boton-sonido');
+    const contenedor = document.getElementById('contenedor-video');
+    let videoMostrado = false;
+
+    boton.addEventListener('click', () => {
+      if (!videoMostrado) {
+        contenedor.innerHTML = `
+          <iframe 
+            src="https://www.youtube.com/embed/oqVaW8OJYkA?autoplay=1&loop=1&playlist=oqVaW8OJYkA" 
+            allow="autoplay" 
+            allowfullscreen>
+          </iframe>`;
+        boton.textContent = "🔇";
+        videoMostrado = true;
+      } else {
+        contenedor.innerHTML = ""; // quitar el video
+        boton.textContent = "🎵";
+        videoMostrado = false;
+      }
+    });
+  </script>
+</body>
+</html>
+
